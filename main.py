@@ -17,9 +17,9 @@ app.add_middleware(
     allow_headers=["*"],  # Permite todos los headers
 )
 
-'''
+
 # Endpoint para el login
-@app.post("/login")
+@app.post("/api/login")
 def login(usuario: Usuarios):
     success, message = validar_usuario(usuario.correo, usuario.password)
     
@@ -27,10 +27,10 @@ def login(usuario: Usuarios):
         raise HTTPException(status_code=400, detail=message)
     
     return {"message": message}
-'''
+
 
 # Endpoint para registrar un nuevo usuario
-@app.post("/register")
+@app.post("/api/register")
 def registrar_usuario(usuario_data: Usuarios):
     correo = usuario_data.correo
     password = usuario_data.password
@@ -41,10 +41,7 @@ def registrar_usuario(usuario_data: Usuarios):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@app.get("/ping")
-def ping():
-    return {"message": "pong"}
-    
+
 ''' 
 #ruta para las crud de autobus
 @app.post("/api")
